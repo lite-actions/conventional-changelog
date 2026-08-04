@@ -21,6 +21,12 @@ assert() { # description  command...
   else echo "  FAIL - ${desc}"; fail=$((fail + 1)); fi
 }
 
+# Make the suite hermetic: when it runs *inside* Actions these are all set, and
+# would leak into the fixtures — GITHUB_REPOSITORY turns the plain-SHA cases
+# into linked ones, and GITHUB_EVENT_PATH points at a real payload whose commits
+# do not exist in the throwaway repo below. Each test opts in to what it needs.
+unset GITHUB_REPOSITORY GITHUB_SERVER_URL GITHUB_EVENT_PATH
+
 tmp="$(mktemp -d)"
 trap 'rm -rf "${tmp}"' EXIT
 cd "${tmp}" || exit 1
