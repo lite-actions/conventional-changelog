@@ -1,0 +1,51 @@
+name: Conventional Changelog
+description: >-
+  Maintain a full CHANGELOG.md from Conventional Commits: every commit grouped
+  by type and linked by short SHA.
+author: mrdoodles
+
+branding:
+  icon: list
+  color: blue
+
+inputs:
+  from:
+    description: >-
+      Base ref/commit for the range, exclusive. Defaults to the push event's
+      `before` commit.
+    required: false
+    default: ""
+  to:
+    description: >-
+      Head ref/commit for the range. Defaults to the push event's `after`
+      commit, else HEAD.
+    required: false
+    default: ""
+  title:
+    description: Heading used when the changelog file is first created.
+    required: false
+    default: "Changelog"
+  output-file:
+    description: File to write the changelog to.
+    required: false
+    default: "CHANGELOG.md"
+
+outputs:
+  changed:
+    description: "true if any commits were logged."
+    value: ${{ steps.gen.outputs.changed }}
+  file:
+    description: The path the changelog was written to.
+    value: ${{ steps.gen.outputs.file }}
+
+runs:
+  using: composite
+  steps:
+    - id: gen
+      shell: bash
+      env:
+        INPUT_FROM: ${{ inputs.from }}
+        INPUT_TO: ${{ inputs.to }}
+        INPUT_TITLE: ${{ inputs.title }}
+        INPUT_OUTPUT_FILE: ${{ inputs.output-file }}
+      run: bash "${GITHUB_ACTION_PATH}/scripts/generate.sh"
