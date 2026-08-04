@@ -1,4 +1,4 @@
-name: Conventional Changelog
+name: Conventional Changelog Lite
 description: >-
   Maintain a full CHANGELOG.md from Conventional Commits: every commit grouped
   by type and linked by short SHA.
