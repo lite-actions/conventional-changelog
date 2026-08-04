@@ -1,18 +1,18 @@
 name: Changelog
 
-# On push to main, log the push's commits to CHANGELOG.md and regenerate
-# RELEASE_NOTES.md. This repo is unprotected, so the update is committed
-# straight back to main — no PR/approval dance needed.
+# On merge to main, log the push's commits to CHANGELOG.md and regenerate
+# RELEASE_NOTES.md, then land both via an auto-merged PR (main is protected, so
+# direct pushes are rejected).
 on:
   push:
     branches: [main]
     paths-ignore:
-      # Ignore the bot's own doc updates so its push cannot loop.
+      # Stop the changelog PR's own merge from looping.
       - CHANGELOG.md
       - RELEASE_NOTES.md
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: changelog
@@ -26,9 +26,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # A user PAT so the branch push / PR creation act as a real user and
+          # therefore trigger the required checks (GITHUB_TOKEN would not).
+          # Falls back to github.token before the secret is configured, so the
+          # job checks out and then gracefully skips instead of erroring.
+          token: ${{ secrets.CHANGELOG_BOT_TOKEN || github.token }}
 
-      # Dogfooding: this repo runs its own action from the working tree, so a
-      # regression on main shows up here first. Consumers use @v1.
       - name: Update changelog
         id: changelog
         uses: ./
@@ -37,16 +40,42 @@ jobs:
         if: steps.changelog.outputs.changed == 'true'
         uses: mrdoodles/release-notes@v1
 
-      - name: Commit the update
+      - name: Open, approve and auto-merge changelog PR
         if: steps.changelog.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.CHANGELOG_BOT_TOKEN }}
+          APPROVE_TOKEN: ${{ secrets.CHANGELOG_APPROVE_TOKEN }}
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add CHANGELOG.md RELEASE_NOTES.md
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
+          if [ -z "${GH_TOKEN:-}" ] || [ -z "${APPROVE_TOKEN:-}" ]; then
+            echo "::warning::CHANGELOG_BOT_TOKEN / CHANGELOG_APPROVE_TOKEN not set; skipping changelog PR."
             exit 0
           fi
-          git commit -m "docs: update changelog and release notes"
-          git push
+          branch="chore/changelog-${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "${branch}"
+          git add CHANGELOG.md RELEASE_NOTES.md
+          git commit --no-verify -m "docs(changelog): update changelog and release notes"
+          git push origin "${branch}"
+
+          gh pr create --base main --head "${branch}" \
+            --title "docs(changelog): update changelog and release notes" \
+            --body "Automated changelog + release-notes update from the latest merge to \`main\`."
+
+          # Approve with a second identity: a PR author/last-pusher cannot
+          # self-approve, and GITHUB_TOKEN cannot approve at all.
+          GH_TOKEN="${APPROVE_TOKEN}" gh pr review "${branch}" --approve \
+            --body "Automated approval of changelog update."
+
+          gh pr merge "${branch}" --auto --rebase --delete-branch
+
+      - name: Clean up on failure
+        if: failure() && steps.changelog.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.CHANGELOG_BOT_TOKEN }}
+        run: |
+          branch="chore/changelog-${GITHUB_RUN_ID}"
+          gh pr close "${branch}" --delete-branch 2>/dev/null || true
+          gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${branch}" 2>/dev/null || true
+          echo "Cleaned up ${branch} (if it existed)."
