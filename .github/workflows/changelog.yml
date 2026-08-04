@@ -1,0 +1,52 @@
+name: Changelog
+
+# On push to main, log the push's commits to CHANGELOG.md and regenerate
+# RELEASE_NOTES.md. This repo is unprotected, so the update is committed
+# straight back to main — no PR/approval dance needed.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      # Ignore the bot's own doc updates so its push cannot loop.
+      - CHANGELOG.md
+      - RELEASE_NOTES.md
+
+permissions:
+  contents: write
+
+concurrency:
+  group: changelog
+  cancel-in-progress: false
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Dogfooding: this repo runs its own action from the working tree, so a
+      # regression on main shows up here first. Consumers use @v1.
+      - name: Update changelog
+        id: changelog
+        uses: ./
+
+      - name: Generate release notes
+        if: steps.changelog.outputs.changed == 'true'
+        uses: mrdoodles/release-notes@v1
+
+      - name: Commit the update
+        if: steps.changelog.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md RELEASE_NOTES.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "docs: update changelog and release notes"
+          git push
