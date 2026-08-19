@@ -23,9 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: lite-actions/git-checkout@v1
         with:
           fetch-depth: 0
+          # release-notes resolves "since the last release" from vX.Y.Z tags,
+          # and git-checkout appends --no-tags unless this is set, even at
+          # fetch-depth 0. actions/checkout implied them; this does not.
+          fetch-tags: true
           # A user PAT so the branch push / PR creation act as a real user and
           # therefore trigger the required checks (GITHUB_TOKEN would not).
           # Falls back to github.token before the secret is configured, so the
