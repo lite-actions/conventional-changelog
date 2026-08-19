@@ -1,6 +1,6 @@
 # conventional-changelog
 
-## v1.0.3
+## v1.0.4
 
-_No user-facing changes since v1.0.2._
+_No user-facing changes since v1.0.3._
 
