@@ -19,7 +19,7 @@ Changes**. This action does no versioning or tagging. No Node/Docker — just
 
 > Looking for the abbreviated, user-facing view instead (BREAKING/feat/fix since
 > the last release, no SHAs)? That is
-> [`mrdoodles/release-notes`](https://github.com/mrdoodles/release-notes). The
+> [`lite-actions/release-notes`](https://github.com/lite-actions/release-notes). The
 > two are designed to be used together.
 
 ## Usage
@@ -28,7 +28,7 @@ Changes**. This action does no versioning or tagging. No Node/Docker — just
 - uses: actions/checkout@v4
   with:
     fetch-depth: 0 # needed so the commit range can be resolved
-- uses: mrdoodles/conventional-changelog@v1
+- uses: lite-actions/conventional-changelog@v1
 - run: cat CHANGELOG.md
 ```
 

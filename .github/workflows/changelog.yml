@@ -42,7 +42,7 @@ jobs:
 
       - name: Generate release notes
         if: steps.changelog.outputs.changed == 'true'
-        uses: mrdoodles/release-notes@v1
+        uses: lite-actions/release-notes@v1
 
       - name: Open, approve and auto-merge changelog PR
         if: steps.changelog.outputs.changed == 'true'

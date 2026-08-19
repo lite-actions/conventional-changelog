@@ -38,7 +38,7 @@ jobs:
 
       - name: Generate release notes
         id: notes
-        uses: mrdoodles/release-notes@v1
+        uses: lite-actions/release-notes@v1
         with:
           from: ${{ github.event.inputs.from }}
           to: ${{ github.event.inputs.to }}
