@@ -73,14 +73,18 @@ The `name:` must be **globally unique** across the Marketplace and the
 was already taken by `quant-eagle`, hence the shorter `Conventional Changelog`.
 Fallback if it is refused at publish time: "Conventional Commit Changelog".
 
-## Versioning & releasing
+## Versioning & publishing
 
-Releases are cut by `release.yml` (`workflow_dispatch`) — never by hand, and
+Releases are cut by `publish.yml` (`workflow_dispatch`) — never by hand, and
 never through the GitHub web UI:
 
 ```bash
-gh workflow run release.yml --repo lite-actions/conventional-changelog
+gh workflow run publish.yml --repo lite-actions/conventional-changelog
 ```
+
+The workflow is named `publish` rather than `release` because "release" is
+overloaded here: `release-notes` generates notes, `rust-release` builds
+binaries, and this cuts and publishes a version. `publish` names the intent.
 
 It computes the version from the commits since the last `vX.Y.Z` tag, tags the
 release, force-moves `@vN`, and publishes the GitHub Release with the generated
