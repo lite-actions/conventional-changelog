@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-20 ([953915c](https://github.com/lite-actions/conventional-changelog/commit/953915cf1061721367137f372153bd2acd202abb))
+
+### Other Changes
+
+- releases are cut by release.yml, never the web UI ([456a63f](https://github.com/lite-actions/conventional-changelog/commit/456a63fef8ff5d19eab4e126f88809dabf80ce82))
+
 ## 2026-08-20 ([d6379e5](https://github.com/lite-actions/conventional-changelog/commit/d6379e56d27abc3b6fad29b55862b5579874734d))
 
 ### Other Changes
