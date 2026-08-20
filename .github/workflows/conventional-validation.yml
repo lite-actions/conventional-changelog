@@ -21,18 +21,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Dependabot's branch/commit naming is bot-controlled and can't follow the
-      # conventional-branch spec; skip validation for it but still report the
-      # (required) check as passing.
-      - name: Skip for Dependabot
-        if: github.actor == 'dependabot[bot]'
-        run: echo "Dependabot PR — conventional validation skipped."
-
+      # Shared definition; the caller still owns the job, so the check is
+      # still reported as `validate`. The Dependabot skip lives inside the
+      # action now - its branch and commit naming is bot-controlled, and the
+      # required check still needs to report as passing.
       - name: Validate conventional commits & branch
-        if: github.actor != 'dependabot[bot]'
-        uses: lite-actions/conventional-validator@v1
+        uses: lite-actions/common-workflows/conventional-validation@v1
         with:
-          validate-commits: "true"
-          validate-branch: "true"
-          validate-body: "true"
           base-ref: ${{ github.event.inputs.base-ref }}

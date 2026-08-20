@@ -16,12 +16,8 @@ jobs:
       - name: Checkout
         uses: lite-actions/git-checkout@v1
 
+      # Shared definition, so a fix lands once rather than five times. The
+      # caller still owns the job, so the check is still reported as `lint`
+      # and branch protection needs no change.
       - name: ShellCheck scripts
-        run: |
-          # shellcheck ships on the ubuntu runner images, so there is nothing
-          # to install. The apt-get that used to be here could hang
-          # indefinitely on an unresponsive mirror, and because lint is a
-          # required check that blocks the PR rather than failing it.
-          # -x follows sourced files; warning severity ignores info/style noise
-          # (e.g. dynamic source paths shellcheck can't resolve statically).
-          shellcheck -x --severity=warning scripts/*.sh tests/*.sh
+        uses: lite-actions/common-workflows/shell-lint@v1
