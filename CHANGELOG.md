@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-20 ([56b7b94](https://github.com/lite-actions/conventional-changelog/commit/56b7b94c2674dfbf75ddd72cbc3391e653d4294c))
+
+### Other Changes
+
+- adopt common-workflows for release ([c5b0954](https://github.com/lite-actions/conventional-changelog/commit/c5b09544c129e161dc928f7f0191d8bf5fd408c6))
+
 ## 2026-08-20 ([012e647](https://github.com/lite-actions/conventional-changelog/commit/012e647f5c226c66d540cd0464c12ba4e1367e92))
 
 ### Other Changes
