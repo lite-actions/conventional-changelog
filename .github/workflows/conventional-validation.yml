@@ -30,7 +30,7 @@ jobs:
 
       - name: Validate conventional commits & branch
         if: github.actor != 'dependabot[bot]'
-        uses: mrdoodles/conventional-validator@v1
+        uses: lite-actions/conventional-validator@v1
         with:
           validate-commits: "true"
           validate-branch: "true"

@@ -10,7 +10,7 @@ and referenced by its **short commit SHA**, under a dated section prepended to
 `CHANGELOG.md`. It does **no versioning or tagging**.
 
 This is the full counterpart to the abbreviated view: **changelog entries here
-keep commit SHAs**; `mrdoodles/release-notes` deliberately omits them because
+keep commit SHAs**; `lite-actions/release-notes` deliberately omits them because
 release notes are for end users. `mrdoodles/versioning-tests` consumes both from
 its `changelog.yml`, so the output format is effectively a contract — the tests
 lock it down.
