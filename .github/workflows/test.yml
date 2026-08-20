@@ -15,5 +15,7 @@ jobs:
       - name: Checkout
         uses: lite-actions/git-checkout@v1
 
+      # Shared definition; the caller still owns the job, so the check is
+      # still reported as `test`.
       - name: Run script tests
-        run: bash tests/test.sh
+        uses: lite-actions/common-workflows/shell-test@v1
