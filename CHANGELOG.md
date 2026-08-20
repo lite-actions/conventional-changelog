@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-20 ([6a091c0](https://github.com/lite-actions/conventional-changelog/commit/6a091c023e8b82a8a0bc83ef7412bb4d0e2a8afe))
+
+### Other Changes
+
+- use the signed-commit action instead of an inline API call ([52012ff](https://github.com/lite-actions/conventional-changelog/commit/52012ffff0656be60ddcb181a25de529dc4388cb))
+
 ## 2026-08-20 ([953915c](https://github.com/lite-actions/conventional-changelog/commit/953915cf1061721367137f372153bd2acd202abb))
 
 ### Other Changes
