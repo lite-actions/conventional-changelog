@@ -1,0 +1,23 @@
+name: Conventional Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: lite-actions/git-checkout@v1
+        with:
+          fetch-depth: 0
+
+      - name: Validate commits and branch
+        uses: lite-actions/conventional-validator@v1
+        with:
+          validate-commits: "true"
+          validate-branch: "true"
+          validate-body: "true"
+          branch-types: "feature bugfix hotfix release chore dependabot"
+          allow-underscores: "true"
