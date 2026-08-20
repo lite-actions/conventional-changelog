@@ -26,6 +26,7 @@ concurrency:
   group: release
   cancel-in-progress: false
 
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -36,30 +37,10 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: Generate release notes
-        id: notes
-        uses: lite-actions/release-notes@v1
+      # Shared definition; the caller keeps contents: write and the checkout.
+      - name: Tag and publish the release
+        uses: lite-actions/common-workflows/release@v1
         with:
           from: ${{ github.event.inputs.from }}
           to: ${{ github.event.inputs.to }}
           version: ${{ github.event.inputs.version }}
-
-      - name: Tag, move major tag, and publish release
-        if: steps.notes.outputs.changed == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ steps.notes.outputs.version }}
-          NOTES_FILE: ${{ steps.notes.outputs.file }}
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          tag="v${VERSION}"
-          major="v${VERSION%%.*}"
-          git tag -a "${tag}" -m "Release ${VERSION}"
-          # Force-move the major tag so consumers on @vN get this release.
-          git tag -f -a "${major}" -m "${major} -> ${VERSION}"
-          git push origin "${tag}"
-          git push origin -f "${major}"
-          # The generated notes file is the GitHub Release body.
-          gh release create "${tag}" --title "${VERSION}" --notes-file "${NOTES_FILE}"
