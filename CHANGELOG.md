@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-20 ([8b9c61f](https://github.com/lite-actions/conventional-changelog/commit/8b9c61f7214c74113b73a737c7e420e1c8818557))
+
+### Other Changes
+
+- rename release.yml to publish.yml ([99b4603](https://github.com/lite-actions/conventional-changelog/commit/99b46037b4b89102ccafa8ec5e4f3866f52113cc))
+
 ## 2026-08-20 ([56b7b94](https://github.com/lite-actions/conventional-changelog/commit/56b7b94c2674dfbf75ddd72cbc3391e653d4294c))
 
 ### Other Changes
