@@ -3,6 +3,18 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-23 ([771b0b0](https://github.com/lite-actions/conventional-changelog/commit/771b0b07e3134bb6080dde9aa8c8a7dc9b88ef59))
+
+### Other Changes
+
+- prohibit pull_request_target ([f1afc69](https://github.com/lite-actions/conventional-changelog/commit/f1afc69fae1b68d4b8e390f44fbbf3900e180b87))
+
+## 2026-08-23 ([b8631e7](https://github.com/lite-actions/conventional-changelog/commit/b8631e7eb1e34924c6cc0419d75390ac9d16d707))
+
+### Other Changes
+
+- add Dependabot for GitHub Actions ([3546d53](https://github.com/lite-actions/conventional-changelog/commit/3546d53b8fc0f2001fab667a53962785d243b306))
+
 ## 2026-08-20 ([d030405](https://github.com/lite-actions/conventional-changelog/commit/d03040575473b487a514d2136152c662509b7c16))
 
 ### Other Changes
