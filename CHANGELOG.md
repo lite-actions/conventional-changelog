@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-23 ([3b3a79b](https://github.com/lite-actions/conventional-changelog/commit/3b3a79b040b3315189c1939c3d48ab21ccd97431))
+
+### Other Changes
+
+- pin git-checkout to a SHA in CI ([30d35b9](https://github.com/lite-actions/conventional-changelog/commit/30d35b99930267ef5f569aca314f407bfaf4654a))
+
 ## 2026-08-23 ([771b0b0](https://github.com/lite-actions/conventional-changelog/commit/771b0b07e3134bb6080dde9aa8c8a7dc9b88ef59))
 
 ### Other Changes
