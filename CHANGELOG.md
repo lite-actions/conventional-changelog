@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-23 ([b8631e7](https://github.com/lite-actions/conventional-changelog/commit/b8631e7eb1e34924c6cc0419d75390ac9d16d707))
+
+### Other Changes
+
+- add Dependabot for GitHub Actions ([3546d53](https://github.com/lite-actions/conventional-changelog/commit/3546d53b8fc0f2001fab667a53962785d243b306))
+
 ## 2026-08-20 ([d030405](https://github.com/lite-actions/conventional-changelog/commit/d03040575473b487a514d2136152c662509b7c16))
 
 ### Other Changes
