@@ -20,4 +20,4 @@ jobs:
       # caller still owns the job, so the check is still reported as `lint`
       # and branch protection needs no change.
       - name: ShellCheck scripts
-        uses: lite-actions/common-workflows/shell-lint@v1
+        uses: lite-actions/actions-workflows/shell-lint@v1

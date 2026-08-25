@@ -18,4 +18,4 @@ jobs:
       # Shared definition; the caller still owns the job, so the check is
       # still reported as `test`.
       - name: Run script tests
-        uses: lite-actions/common-workflows/shell-test@v1
+        uses: lite-actions/actions-workflows/shell-test@v1
