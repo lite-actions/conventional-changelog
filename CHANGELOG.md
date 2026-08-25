@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-25 ([6d95e28](https://github.com/lite-actions/conventional-changelog/commit/6d95e288fb362c947116f024b6b8299b0184cece))
+
+### Other Changes
+
+- point the shared workflow references at actions-workflows ([15b889e](https://github.com/lite-actions/conventional-changelog/commit/15b889e729226c997ad07f2706d758bac0df0556))
+
 ## 2026-08-23 ([3b3a79b](https://github.com/lite-actions/conventional-changelog/commit/3b3a79b040b3315189c1939c3d48ab21ccd97431))
 
 ### Other Changes
