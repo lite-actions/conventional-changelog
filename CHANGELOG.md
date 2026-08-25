@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file,
 grouped by push and referenced by short commit SHA.
 
+## 2026-08-25 ([f558093](https://github.com/lite-actions/conventional-changelog/commit/f558093821eb738b36b82dc93923938ab88cff71))
+
+### Other Changes
+
+- remove the per-repo Claude skills ([6880250](https://github.com/lite-actions/conventional-changelog/commit/688025021d5bf2919264449701990358f7e8c5c4))
+
 ## 2026-08-25 ([6d95e28](https://github.com/lite-actions/conventional-changelog/commit/6d95e288fb362c947116f024b6b8299b0184cece))
 
 ### Other Changes
