@@ -39,7 +39,7 @@ jobs:
 
       # Shared definition; the caller keeps contents: write and the checkout.
       - name: Tag and publish the release
-        uses: lite-actions/common-workflows/publish@v1
+        uses: lite-actions/actions-workflows/publish@v1
         with:
           from: ${{ github.event.inputs.from }}
           to: ${{ github.event.inputs.to }}

@@ -26,6 +26,6 @@ jobs:
       # action now - its branch and commit naming is bot-controlled, and the
       # required check still needs to report as passing.
       - name: Validate conventional commits & branch
-        uses: lite-actions/common-workflows/conventional-validation@v1
+        uses: lite-actions/actions-workflows/conventional-validation@v1
         with:
           base-ref: ${{ github.event.inputs.base-ref }}
